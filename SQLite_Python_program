@@ -1,0 +1,15 @@
+import sqlite3
+
+db = sqlite3.connect('mydb1')
+
+cursor = db.cursor()
+cursor.execute('''CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT, phone TEXT, email TEXT unique)''')
+cursor.execute('''INSERT INTO users(name, phone, email) VALUES("John", "33993388", "john@gmail.com")''')
+cursor.execute('''INSERT INTO users(name, phone, email) VALUES("Mary", "0044345345", "mary@hotmail.com")''')
+db.commit()
+
+cursor.execute('''SELECT name, phone, email FROM users''')
+all_users = cursor.fetchall()
+print(all_users)
+
+db.close()
